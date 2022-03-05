@@ -1,4 +1,28 @@
 
+{{!-- Allows for bootstrap formatting --}}
+<div class="col-8 mx-auto border p-3 my-4">
+
+    <form id="edit-post-form">
+        <input type="hidden" name="post-id" value="{{post.id}}">
+        <h3>Edit Post:</h3>
+
+        <div class="mb-3">
+            <label for="post-title" class="form-label">Title:</label>
+            <input class="form-control" type="text" id="post-title" name="post-title" value="{{post.title}}" required/>
+        </div>
+
+        <div class="mb-3">
+            <label for="post-body" class="form-label">Body:</label>
+            <textarea class="form-control" id="post-body" name="post-body" style="height: 200px" required>{{post.text}}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <button id="delete-btn" class="btn btn-danger" data-id="{{post.id}}">Delete</button>
+        </div>
+    </form>
+
+</div>
 
 
 
