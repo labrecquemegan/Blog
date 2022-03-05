@@ -1,7 +1,7 @@
 // What do we need to require here?
 const {Model, DataTypes} = require('sequelize')
 const bycript = require('bcrypt')
-const sequelize = require('../config/config')
+const sequelize = require('../config/connection')
 
 
 // create our User model
