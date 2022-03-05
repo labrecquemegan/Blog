@@ -23,7 +23,8 @@ User.init(
   },
   username: {
     type: DataTypes.String,
-    allowNull: false
+    allowNull: false,
+    unique: true,
   },
   password: {
     type: DataTypes.STRING,
