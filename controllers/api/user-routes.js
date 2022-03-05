@@ -5,49 +5,54 @@ const { User } = require('../../models');
 router.post('/', async (req, res) => {
   // Create the correct asychronous function for this login post request with error handling
   try {
-    const dbUserData = await User.create({
+    const userData = await User.create({
       username: req.body.username,
-      email: req.body.email,
       password: req.body.password,
     });
 
     req.session.save(() => {
+      req.session.user_id = userData.id;
       req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      res.status(200).json(userData);
     });
+
+    res.status(200).json(userData);
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
+// Login function
 router.post('/login', async (req, res) => {
   // Create the correct asychronous function for this login post request with error handling
   try {
-    const dbUserData = await User.findOne({
+    const userData = await User.findOne({
       where: {
-        email: req.body.email,
+        username: req.body.email,
       },
     });
 
-    if (!dbUserData) {
+    if (!userData) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: 'Incorrect username or password. Please try again!' });
       return;
     }
 
-    const validPassword = await dbUserData.checkPassword(req.body.password);
+    const validPassword = await userData.checkPassword(req.body.password);
 
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
+        .json({ message: 'Incorrect username or password. Please try again!' });
       return;
     }
 
     req.session.save(() => {
+      req.session.user_id = userData.id;
       req.session.loggedIn = true;
 
       res
@@ -60,8 +65,11 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// logout
 router.post('/logout', (req, res) => {
   // Create the correct functionality for this post request with error handling
+  try {
+  
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();
@@ -69,6 +77,10 @@ router.post('/logout', (req, res) => {
   } else {
     res.status(404).end();
   }
+
+} catch (err) {
+  res.status(404).end();
+}
 });
 
 module.exports = router;
