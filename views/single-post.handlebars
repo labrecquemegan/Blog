@@ -1,3 +1,49 @@
 
 
+<div class="container mt-5">
+
+    {{!-- post --}}
+    <div class="card custom-card m-3">
+        <div class="card-header">
+            <h3 class="card-title">{{post.title}}</h3>
+            <p class="card-subtitle text-muted">{{post.user.username}}</p>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                {{post.text}}
+            </p>
+        </div>
+    </div>
+
+    <form id="new-comment-form" class="p-3">
+        {{!-- form for commenting --}}
+        <h5>Share your thoughts!</h5>
+        <div class="input-group mb-3">
+            <input type="hidden" name="post-id" value="{{post.id}}">
+            <textarea name="comment-body" id="comment-body" cols="30" rows="2" class="form-control"></textarea required>
+        </div>
+
+        {{#if logged_in}}
+            <button type="submit" class="btn btn-primary">Submit</button>
+        {{else}}
+            <button type="submit" class="btn btn-primary disabled">Log in to Comment</button>
+        {{/if}}
+    </form>
+
+    
+    {{#each comments as |comment|}}
+    {{!-- saved comment section --}}
+
+    <div class="card custom-card m-3">
+        <div class="card-body">
+        <h5 class="card-subtitle text-muted">{{comment.user.username}}</h5>
+        <p>{{format_date comment.user.createdAt}}</p>
+        <p class="card-text">{{comment.text}}</p>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+
+
 <script src="/js/comment.js"></script>

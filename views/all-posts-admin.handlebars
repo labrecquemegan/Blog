@@ -1,0 +1,23 @@
+{{!-- saved posts by user --}}
+    {{#if posts.length}}
+    <div class="col-12 col-lg-8 mx-auto">
+        <h3>Your Posts:</h3>
+
+        <div class="container mb-2 post-list">
+            {{#each posts as |post|}}
+            <input type="hidden" name="post-id" value="{{post.id}}">
+            <div class="card custom-card mb-4">
+                <div class="card-header">
+                    <h4><a href="/post/{{post.id}}">{{post.title}}</a></h4>
+                </div>
+                <div class="card-body">
+                    <p>{{post.text}}</p>
+                    <a id="edit-btn" href="/post/edit/{{post.id}}" class="btn btn-sm btn-secondary" data-id="{{post.id}}">Edit</a>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </div>
+    {{/if}}
+</div>
