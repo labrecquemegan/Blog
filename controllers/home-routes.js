@@ -55,18 +55,6 @@ router.get('/post/:id', async (req, res) => {
 
 });
 
-// edit posts
-router.get('/post/edit/:id', withAuth, async (req, res) => {
-	try {
-		const postData = await Post.findByPk(req.params.id);
-		const post = postData.get({ plain: true });
-
-		res.render('edit-post', { post, logged_in: req.session.logged_in });
-	} catch (err) {
-		res.status(500).json(err);
-	}
-});
-
 // login
 router.get('/login', (req, res) => {
     if (req.session.logged_in) {
