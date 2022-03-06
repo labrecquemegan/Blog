@@ -22,22 +22,9 @@ Post.init(
 			type: DataTypes.TEXT,
 			allowNull: false,
 		},
-    user_id: {
-			type: DataTypes.INTEGER,
-			references: {
-				model: 'users',
-				key: 'id',
-			},
-    },
-    body: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },  
   },
   {
-    sequelize,
-    underscored: true,
-		modelName: 'post',
+    sequelize
   }
 );
 

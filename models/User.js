@@ -16,13 +16,13 @@ User.init(
   {
   //  What needs to go in the User expression here?
   id: {
-    type: DataTypes.INTERGER,
+    type: DataTypes.INTEGER,
     allowNull: false,
     primaryKey: true,
     autoIncrement: true
   },
   username: {
-    type: DataTypes.String,
+    type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
@@ -51,7 +51,7 @@ User.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'user'
+    modelName: 'User'
   }
 );
 
